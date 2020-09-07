@@ -5,6 +5,7 @@ const Home = ()=>import('@/views/Home')
 // const About= ()=>import('@/views/About')
 const form =()=>import('@/views/form')
 const Select =()=>import('@/views/Select')
+const Check =()=>import('@/views/Check')
 
 Vue.use(Router)
 
@@ -30,6 +31,11 @@ export default new Router({
       path:'/Select',
       name:'Select',
       component:Select
-    }
+    },
+    {
+    path:'/Check',
+    name:'Check',
+    component:Check
+  }
   ]
 })

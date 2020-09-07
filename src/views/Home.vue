@@ -67,15 +67,16 @@
       <el-table
         :data="tableData"
         :row-class-name="tableRowClassName"
+        :header-cell-style="{background:'#CCCCCC'}"
 >
       
-        <el-table-column prop="id" label="ID" width="50"></el-table-column>
-        <el-table-column prop="name" label="名称"></el-table-column>
-        <el-table-column prop="address" label="内容"></el-table-column>
-        <el-table-column prop="flag" width="80" label="状态"></el-table-column>
-        <el-table-column prop="dataSr" label="创建时间"></el-table-column>
-        <el-table-column prop="ss" style="color:blue;" label="操作">
-          <el-button >编辑</el-button>
+        <el-table-column prop="id" label="ID" width="50" align="center"></el-table-column>
+        <el-table-column prop="name" label="名称" align="center"></el-table-column>
+        <el-table-column prop="address" label="内容" align="center"></el-table-column>
+        <el-table-column prop="flag" width="80" label="状态" align="center"></el-table-column>
+        <el-table-column prop="dataSr" label="创建时间" align="center"></el-table-column>
+        <el-table-column prop="ss" style="color:blue;" label="操作" align="center">
+          <el-button >详情</el-button>
         </el-table-column>
       </el-table>
 
@@ -101,10 +102,12 @@ export default {
         user: "",
         region: ""
       },
+      
       formInlines: {
         user: "",
         region: ""
       },
+      //表格数据
       tableData: [
         {
           id: 1,
