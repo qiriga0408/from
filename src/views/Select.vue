@@ -6,11 +6,34 @@
           <el-input v-model="formInline.user" placeholder="关键字查询"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-button type="primary" @click="onSubmit">查询</el-button>
+          <el-button type="primary" @click="Search">查询</el-button>
         </el-form-item>
       </el-form>
     </div>
-    <div class="con">
+
+     <!-- 搜索后的 -->
+     <div class="con" v-if="searchData.length>0">
+      <template>
+        <el-table :header-cell-style="{background:'#CCCCCC'}" :data="searchData" border style="width: 100%">
+          <el-table-column type="selection" width="180" align="center" :selectable='checkbox_callback'>
+               <!-- <el-checkbox v-model="check"></el-checkbox> -->
+          </el-table-column>
+          <el-table-column prop="id" label="编号" align="center" ></el-table-column>
+          <el-table-column prop="name" label="服务名称" align="center"></el-table-column>
+           <el-table-column prop="url" label="URL" align="center"></el-table-column>
+          <el-table-column prop="ip" label="IP" align="center"></el-table-column>
+          <el-table-column prop="address" label="操作系统" align="center"></el-table-column>
+           <el-table-column prop="dateNum" label="访问数" align="center" ></el-table-column>
+          <el-table-column prop="k" label="查看" align="center">
+            <el-button>详情</el-button>
+          </el-table-column>
+        </el-table>
+      </template>
+    </div>
+
+
+    <!-- 搜索前的 -->
+    <div class="con" v-else>
       <template>
         <el-table :header-cell-style="{background:'#CCCCCC'}" :data="tableData" border style="width: 100%">
           <el-table-column type="selection" width="180" align="center" :selectable='checkbox_callback'>
@@ -29,11 +52,10 @@
         </el-table>
       </template>
     </div>
+   
   </div>
 </template>
-    </div>
-  </div>
-</template>
+
 <script>
 export default {
   data() {
@@ -76,14 +98,41 @@ export default {
           dateNum:'11311',
           check:false
         }],
+         // 搜索后的展示数据
+           searchData: []
     };
   },
   created() {},
   computed: {},
   methods: {
-    onSubmit() {
-      console.log("submit!");
-    },
+    Search() {
+      // search 是 v-model="search" 的 search
+      var search = this.formInline.user;
+      if (search) {
+        this.searchData = this.tableData.filter(function(product) {
+          // 每一项数据
+          // console.log(product)
+          return Object.keys(product).some(function(key) {
+            // 每一项数据的参数名
+            // console.log(key)
+            return (
+              String(product[key])
+                // toLowerCase() 方法用于把字符串转换为小写。
+                .toLowerCase()
+                // indexOf() 方法可返回某个指定的字符串值在字符串中首次出现的位置。
+                .indexOf(search) > -1
+            );
+          });
+        });
+      }else{
+          this.$message({
+                    showClose: true,
+                    message: '请输入搜索条件！',
+                    type: 'warning'
+                });
+      }
+    }
+  
   },
 };
 </script>

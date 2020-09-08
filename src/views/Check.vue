@@ -36,22 +36,22 @@
           <el-table-column prop="dk" label="端口" align="center" width="80"></el-table-column>
           <el-table-column prop="xy" label="协议" align="center" width="80"></el-table-column>
           <el-table-column prop="url" label="接口地址" align="center" width="150"></el-table-column>
-
           <el-table-column prop="flag" label="状态" align="center" width="100"></el-table-column>
-
           <el-table-column prop="dateNum" label="创建时间" align="center" width="150"></el-table-column>
           <el-table-column prop="k" label="查看"  align="center">
-            <template >
+            <template slot-scope="scope">
               <span class="ri">配置</span>
               <span class="ri">启动</span>
               <span class="ri">停止</span>
-              <span class="ri">删除</span>
+              <span class="ri" @click="del(scope.id)">删除</span>
               <span class="ri">评价</span>
             </template>
           </el-table-column>
         </el-table>
       </template>
     </div>
+
+
   </div>
 </template>
 <script>
@@ -99,6 +99,10 @@ export default {
     deletes() {
       console.log("删除方法");
     },
+    //表格里面删除
+    del(i){
+        this.tableData.splice(i,1)
+    }
   },
 };
 </script>
@@ -106,17 +110,10 @@ export default {
 .check {
   width: 100%;
   height: 100%;
-  //   .el-table .el-table_1_column_10 .is-center  .cell{
-  //       display: flex;
-  //   }
-    //   float: left;
-
      .ri{
         margin-left: 30px;
         color: #3399CC;
         cursor: pointer;
     }
-    // display: flex;
- 
 }
 </style>

@@ -1,11 +1,10 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import Home from './views/Home.vue'
-const Home = ()=>import('@/views/Home')
-// const About= ()=>import('@/views/About')
-const form =()=>import('@/views/form')
-const Select =()=>import('@/views/Select')
-const Check =()=>import('@/views/Check')
+const Home = () => import('@/views/Home')
+const form = () => import('@/views/form')
+const Select = () => import('@/views/Select')
+const Check = () => import('@/views/Check')
 
 Vue.use(Router)
 
@@ -19,8 +18,8 @@ export default new Router({
       component: Home
     },
     {
-      path:'/',
-      redirect:'/home'
+      path: '/',
+      redirect: '/home'
     },
     {
       path: '/form',
@@ -28,14 +27,14 @@ export default new Router({
       component: form
     },
     {
-      path:'/Select',
-      name:'Select',
-      component:Select
+      path: '/Select',
+      name: 'Select',
+      component: Select
     },
     {
-    path:'/Check',
-    name:'Check',
-    component:Check
-  }
+      path: '/Check',
+      name: 'Check',
+      component: Check
+    }
   ]
 })
