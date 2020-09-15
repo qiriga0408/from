@@ -6,6 +6,8 @@ import store from './store'
 // import 'element-ui/lib/theme-chalk/index.css';
 // import './ElementUI';
 
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts 
 
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
@@ -18,6 +20,7 @@ import wcSwiper from 'wc-swiper'
 import 'wc-swiper/style.css'
 Vue.use(wcSwiper)
 
+// import axios from './request/http'
 import axios from 'axios'
 Vue.prototype.$axios = axios
 

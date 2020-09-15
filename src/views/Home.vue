@@ -1,6 +1,35 @@
 <template>
   <div class="home">
-    <div class="header">
+    <el-container>
+  <el-aside width="300px">
+    <h2 style="font-weight:bold;margin-left:30px;margin-top:30px;">服务监控管理</h2>
+    <el-collapse v-model="activeNames" @change="handleChange">
+        <el-collapse-item title="服务需求管理" name="1">
+          <div class="cuspowr">服务需求管理1</div>
+          <div class="cuspowr">服务需求管理2</div>
+          <div class="cuspowr">服务需求管理3</div>
+        </el-collapse-item>
+        <el-collapse-item title="服务接口管理" name="2">
+          <div class="cuspowr">服务接口管理1</div>
+          <div class="cuspowr">服务接口管理2</div>
+        </el-collapse-item>
+         <el-collapse-item title="服务监控管理" name="3">
+          <router-link tag="div" to="/Home/AddRule" class="cuspowr">添加规则</router-link>
+          <router-link tag="div" to="/Home/Check" class="cuspowr">告警规则管理</router-link>
+        </el-collapse-item>
+        <el-collapse-item title="服务接口统计" name="4">
+          <div class="cuspowr">访问频次</div>
+          <div class="cuspowr">流量数据</div>
+          <div class="cuspowr">调用类型</div>
+          <div class="cuspowr">IP访问统计</div>
+        </el-collapse-item>
+      </el-collapse>
+  </el-aside>
+  <el-main>
+    <router-view></router-view>
+  </el-main>
+</el-container>
+    <!-- <div class="header">
       <el-form :inline="true" :model="formInline" class="demo-form-inline">
         <el-form-item label="名称">
           <el-input v-model="formInline.user" placeholder="请输入名称"></el-input>
@@ -14,30 +43,16 @@
         <el-form-item>
           <el-button type="primary" @click="onSubmit">查询</el-button>
           <el-button type="primary" @click="addDialog">需要申请</el-button>
-          <!-- <el-button type="primary" >添加</el-button> -->
+         
           <el-button @click="del(id)" type="primary">删除</el-button>
         </el-form-item>
       </el-form>
-    </div>
-    <!-- 点击查询会弹框 -->
-    <!-- <el-dialog :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
-      <el-form :model="formInlines" label-width="80px">
-        <el-form-item label="名称">
-          <el-input v-model="formInlines.user" placeholder="名称"></el-input>
-        </el-form-item>
-        <el-form-item label="内容" prop="desc">
-          <el-input v-model="formInlines.region" type="textarea"></el-input>
-        </el-form-item>
-      </el-form>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">提交</el-button>
-        <el-button type="primary" @click="dialogVisible = false">关闭</el-button>
-      </span>
-    </el-dialog>-->
+    </div> -->
+   
 
     <!-- //添加数据 -->
-    <el-dialog :visible.sync="addDialogVisible" width="30%" :before-close="addhandleClose">
-      <!-- 内容部分 -->
+    <!-- <el-dialog :visible.sync="addDialogVisible" width="30%" :before-close="addhandleClose">
+     
       <el-form :model="addformInlines" label-width="80px">
         <el-form-item label="ID">
           <el-input v-model="addformInlines.id" placeholder="ID"></el-input>
@@ -59,11 +74,11 @@
         <el-button @click="addDialogVisible = false">取消</el-button>
         <el-button type="primary" @click="addCart">添加</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <!-- 点击详情会出现弹框，并且修改数据 -->
-    <el-dialog :visible.sync="beforeDialogVisible" width="30%" :before-close="beforehandleClose">
-      <!-- 内容部分 -->
+    <!-- <el-dialog :visible.sync="beforeDialogVisible" width="30%" :before-close="beforehandleClose">
+     
       <el-form :model="befores" label-width="80px">
         <el-form-item label="ID">
           <el-input v-model="befores.id" placeholder="ID"></el-input>
@@ -86,10 +101,10 @@
         <el-button @click="beforeDialogVisible = false">取消</el-button>
         <el-button type="primary" @click="beforeClose">修改</el-button>
       </span>
-    </el-dialog>
+    </el-dialog> -->
 
     <!-- //搜索后的 -->
-    <div class="content" v-if="searchData.length>0">
+    <!-- <div class="content" v-if="searchData.length>0">
       <el-table
         :data="searchData"
         :row-class-name="tableRowClassName"
@@ -108,13 +123,13 @@
       </el-table>
 
       <div class="block">
-        <!-- <span class="demonstration">页数较少时的效果</span> -->
+       
         <el-pagination layout="prev, pager, next" :total="5" style="float:right;"></el-pagination>
       </div>
-    </div>
+    </div> -->
 
     <!-- 搜索前的 -->
-    <div class="content" v-else>
+    <!-- <div class="content" v-else>
       <el-table
         :data="tableData"
         :row-class-name="tableRowClassName"
@@ -133,16 +148,21 @@
       </el-table>
 
       <div class="block">
-        <!-- <span class="demonstration">页数较少时的效果</span> -->
+       
         <el-pagination layout="prev, pager, next" :total="5" style="float:right;"></el-pagination>
       </div>
-    </div>
+    </div> -->
+   
+    
   </div>
 </template>
 <script>
+// import demo from '@/views/demo'
 export default {
+  // components:{demo},
   data() {
     return {
+       activeNames: ['1'],
       addformInlines: {
         id: "",
         name: "",
@@ -197,6 +217,9 @@ export default {
   created() {},
   computed: {},
   methods: {
+      handleChange(val) {
+        console.log(val);
+      },
     //删除功能
     del(i) {
       this.tableData.splice(i, 1);
@@ -261,12 +284,16 @@ export default {
             );
           });
         });
-      } else {
+      }else if(search.length == 0){
+        this.searchData = this.tableData
+      }else {
+        
         this.$message({
           showClose: true,
           message: "请输入搜索条件！",
           type: "warning",
         });
+        return this.searchData;
       }
     },
     //下面表格的
@@ -286,6 +313,9 @@ export default {
         .catch((_) => {});
     },
   },
+  mounted(){
+    
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -294,19 +324,14 @@ export default {
   height: 100%;
   margin: 0 auto;
   // background: white(235, 233, 233);
+  .cuspowr{
+    margin-left: 90px;
+    margin-top: 20px;
+    cursor: pointer;
+  }
+  .el-main{
+    margin-top: 50px;
+  }
 }
-.header {
-  width: 100%;
-  height: 70px;
-  // background: darkcyan;
-  // .el-form-item__content{
-  //   width: 10px;
-  // }
-  // margin: 0 auto;
-}
-.content {
-  width: 100%;
-  height: auto;
-  margin-top: 20px;
-}
+
 </style>
